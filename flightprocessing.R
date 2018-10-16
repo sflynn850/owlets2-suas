@@ -10,7 +10,7 @@ setwd ('~/Documents/PDS/OWLETS2/data/flightdat/CSVs/')
 # uncomment to do an entire directory
 #csvFiles <- list.files(path='.', pattern='*.csv')
 
-csvFiles <- c("FLY312.csv")
+csvFiles <- c("FLY310.csv")
 for(curFlightCSV in csvFiles){
   setwd ('~/Documents/PDS/OWLETS2/data/flightdat/CSVs/')
   flightData = read.csv(file=curFlightCSV, header = TRUE)
@@ -37,7 +37,7 @@ for(curFlightCSV in csvFiles){
   
   #load the POM data
   setwd ('~/Documents/PDS/OWLETS2/data/POM/')
-  flightPOMdf <- read.csv('pippin1102_20180703d.csv', skip=5)
+  flightPOMdf <- read.csv('pippin1102_20180703b.csv', skip=1)
   # sfcPOMdf <- read.csv('sfc-POMsave_18_06_20_20_07_17.txt', skip=5)
   
   #fix the no-header data
@@ -59,7 +59,9 @@ for(curFlightCSV in csvFiles){
   # ************************************************ 
   # *************** start the mapping ************** 
   # ************************************************ 
-  
+
+  setwd ('~/Documents/PDS/OWLETS2/data/plotsplotsplots/')
+
   #make an ozone vs time (alt) plot
   print(qplot (x=inspirePOMdf$GPSDateTime, y=inspirePOMdf$ozone, geom='point', color=inspirePOMdf$relativeHeight) +
     ylim(0,150) +
@@ -73,7 +75,7 @@ for(curFlightCSV in csvFiles){
   print(
   ggplot(data=NULL, aes(x=GPSDateTime, y=relativeHeight)) +
     geom_point(data=inspirePOMdf, aes(color=ozone)) +
-    scale_color_gradient2(limits = c(25, 125), space="Lab", low='blue', mid='yellow', high='red', midpoint=75) +
+    scale_color_gradient2(limits = c(0, 150), space="Lab", low='blue', mid='yellow', high='red', midpoint=75) +
     labs(color='Ozone', x = 'GPS Time', y = 'Inspire Press. Alt.', title = paste(gsub('.csv', '', curFlightCSV[1]), inspirePOMdf$GPSDateTime[1]))
   )
   #save the plot
