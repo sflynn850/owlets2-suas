@@ -7,12 +7,12 @@ library(lubridate)
 
 #set working directory to CSVs
 setwd ('~/Documents/PDS/OWLETS2/data/flightdat/CSVs/')
-csvFiles <- list.files(path='.', pattern='*.csv')
+# uncomment to do an entire directory
+#csvFiles <- list.files(path='.', pattern='*.csv')
 
 csvFiles <- c("FLY312.csv")
 for(curFlightCSV in csvFiles){
   setwd ('~/Documents/PDS/OWLETS2/data/flightdat/CSVs/')
-  #test -- curFlightCSV <- c('fly253.csv')
   flightData = read.csv(file=curFlightCSV, header = TRUE)
   
   # get GPS info - don't forget to disregard gps height; it's lies.
